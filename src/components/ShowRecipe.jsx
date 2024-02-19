@@ -1,5 +1,9 @@
-import React, { useState } from "react";
 import "./ShowRecipe.css";
+
+import React, { useState } from "react";
+
+import Markdown from "react-markdown";
+import ReactMarkdown from "react-markdown";
 
 const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
@@ -8,13 +12,21 @@ const ShowRecipe = (props) => {
   const [text, setText] = useState("");
   const [response, setResponse] = useState("");
 
+  const [fruit, setFruit] = useState("");
+
   const processMessageToChatGPT = async () => {
     console.log(props.product);
+    let ingredient = props.product;
+    // if (ingredient === "") {
+    //   console.log(fruit);
+    //   ingredient = fruit;
+    // }
 
     const message_content =
-      "I am asking you for a recipe with this ingredient " + props.product;
+      "Format: Beautiful looking markdown. I am asking you for a recipe with this ingredient " +
+      ingredient;
     const apiRequestBody = {
-      model: "gpt-3.5-turbo",
+      model: "gpt-3.5-turbo-0125",
       messages: [{ role: "system", content: message_content }],
     };
 
@@ -56,16 +68,28 @@ const ShowRecipe = (props) => {
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           marginTop: "10px",
         }}
       >
+        {/* <br />
+        <input
+          type="text"
+          value={fruit}
+          onChange={(e) => setFruit(e.target.value)}
+          placeholder="Enter fruit"
+        /> */}
+        <br />
         <button style={buttonStyle} onClick={processMessageToChatGPT}>
           Generate a Recipe
         </button>
       </div>
-      <p className="recipe-box">{response}</p>
+      {/* <p className="recipe-box" style={{ whiteSpace: "pre-wrap" }}>
+        {response}
+      </p> */}
+      <ReactMarkdown className="recipe-box">{response}</ReactMarkdown>
     </div>
   );
 };
