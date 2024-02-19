@@ -30,7 +30,7 @@ const ShowRecipe = (props) => {
     const message_content =
       "I am asking you for a recipe with this ingredient " +
       ingredient +
-      ". Output format: Beautiful looking Markdown text format with all of different markdown elements to be super visually pleasing, similar to a github readme with emojis. ";
+      ". Output format: Beautiful looking Markdown text format with all of different markdown elements to be super visually pleasing, similar to a github readme / linkedin posts with emojis ideally for every line. ";
     const apiRequestBody = {
       model: "gpt-3.5-turbo-0125",
       messages: [{ role: "system", content: message_content }],
