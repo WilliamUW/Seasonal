@@ -15,7 +15,11 @@ const ShowRecipe = (props) => {
   const [fruit, setFruit] = useState("");
 
   const processMessageToChatGPT = async () => {
-    setResponse("Generating recipe for " + props.product + "! Please allow up to 5 seconds.");
+    setResponse(
+      "Generating recipe for " +
+        props.product +
+        "! Please allow up to 5 seconds."
+    );
     console.log(props.product);
     let ingredient = props.product;
     // if (ingredient === "") {
@@ -24,8 +28,9 @@ const ShowRecipe = (props) => {
     // }
 
     const message_content =
-      "Format: Beautiful looking markdown. I am asking you for a recipe with this ingredient " +
-      ingredient;
+      "I am asking you for a recipe with this ingredient " +
+      ingredient +
+      ". Output format: Beautiful looking Markdown text format with all of different markdown elements to be super visually pleasing, similar to a github readme with emojis. ";
     const apiRequestBody = {
       model: "gpt-3.5-turbo-0125",
       messages: [{ role: "system", content: message_content }],
