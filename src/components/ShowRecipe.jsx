@@ -96,6 +96,9 @@ const ShowRecipe = (props) => {
         {response}
       </p> */}
       <ReactMarkdown className="recipe-box">{response}</ReactMarkdown>
+      <br />
+      <br />
+      <br />
     </div>
   );
 };
